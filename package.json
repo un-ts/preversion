@@ -1,13 +1,13 @@
 {
-  "name": "lib-boilerplate",
+  "name": "pre-release",
   "version": "0.1.0",
   "type": "module",
   "description": "A simple library boilerplate.",
-  "repository": "git+https://github.com/un-ts/lib-boilerplate.git",
+  "repository": "git+https://github.com/un-ts/pre-release.git",
   "author": "JounQin (https://www.1stG.me) <admin@1stg.me>",
   "funding": "https://opencollective.com/unts",
   "license": "MIT",
-  "packageManager": "yarn@4.0.1",
+  "packageManager": "yarn@4.0.2",
   "engines": {
     "node": ">=18.0.0"
   },

@@ -1,10 +1,10 @@
-# lib-boilerplate
+# pre-release
 
-[![GitHub Actions](https://github.com/un-ts/lib-boilerplate/workflows/CI/badge.svg)](https://github.com/un-ts/lib-boilerplate/actions/workflows/ci.yml)
-[![Codecov](https://img.shields.io/codecov/c/github/un-ts/lib-boilerplate.svg)](https://codecov.io/gh/un-ts/lib-boilerplate)
+[![GitHub Actions](https://github.com/un-ts/pre-release/workflows/CI/badge.svg)](https://github.com/un-ts/pre-release/actions/workflows/ci.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/un-ts/pre-release.svg)](https://codecov.io/gh/un-ts/pre-release)
 [![type-coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fun-ts%2Flib-boilerplate%2Fmain%2Fpackage.json)](https://github.com/plantain-00/type-coverage)
-[![npm](https://img.shields.io/npm/v/lib-boilerplate.svg)](https://www.npmjs.com/package/lib-boilerplate)
-[![GitHub Release](https://img.shields.io/github/release/un-ts/lib-boilerplate)](https://github.com/un-ts/lib-boilerplate/releases)
+[![npm](https://img.shields.io/npm/v/pre-release.svg)](https://www.npmjs.com/package/pre-release)
+[![GitHub Release](https://img.shields.io/github/release/un-ts/pre-release)](https://github.com/un-ts/pre-release/releases)
 
 [![Conventional Commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
@@ -30,19 +30,19 @@ A simple library boilerplate.
 
 ```sh
 # pnpm
-pnpm add lib-boilerplate
+pnpm add pre-release
 
 # yarn
-yarn add lib-boilerplate
+yarn add pre-release
 
 # npm
-npm i lib-boilerplate
+npm i pre-release
 ```
 
 ### API
 
 ```js
-import echo from 'lib-boilerplate'
+import echo from 'pre-release'
 
 echo()
 ```

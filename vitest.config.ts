@@ -9,7 +9,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'lib-boilerplate': './src/index.ts',
+      'pre-release': './src/index.ts',
     },
   },
   test: {
