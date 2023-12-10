@@ -9,12 +9,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'pre-release': './src/index.ts',
+      preversion: new URL('src/index.ts', import.meta.url).pathname,
     },
   },
   test: {
     coverage: {
       reporter: ['lcov', 'json', 'text'],
+      include: ['src'],
     },
   },
 })
