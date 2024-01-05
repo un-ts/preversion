@@ -1,0 +1,24 @@
+diff --git a/lib/index.js b/lib/index.js
+index 104d30a2166acc5af090f3ff8c0b8fed2339b3cd..f9823d3e62a0c649f3f2e2cfccabbcb0b30f4fb6 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -36,13 +36,16 @@ export default [
+             if (!check.esbuildOutfile) {
+                 check.esbuildOutfile = join(tmpdir(), `size-limit-${nanoid()}`);
+             }
++            const defaultEsbuldConfig = await getConfig(config, check, check.esbuildOutfile);
+             if (check.config) {
+                 const esbuildConfig = (await import(check.config));
+-                setPlatformNode((check.esbuildConfig =
+-                    'default' in esbuildConfig ? esbuildConfig.default : esbuildConfig));
++                setPlatformNode((check.esbuildConfig = {
++                    ...defaultEsbuldConfig,
++                    ...('default' in esbuildConfig ? esbuildConfig.default : esbuildConfig),
++                }));
+             }
+             else {
+-                check.esbuildConfig = setPlatformNode(await getConfig(config, check, check.esbuildOutfile));
++                check.esbuildConfig = setPlatformNode(defaultEsbuldConfig);
+                 if (check.modifyEsbuildConfig) {
+                     check.esbuildConfig = check.modifyEsbuildConfig(check.esbuildConfig);
+                 }

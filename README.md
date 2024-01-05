@@ -12,12 +12,13 @@
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![changesets](https://img.shields.io/badge/maintained%20with-changesets-176de3.svg)](https://github.com/changesets/changesets)
 
-A simple library boilerplate.
+> A tiny cli helps you to publish alpha/beta versions to npm before releasing the final latest version
 
 ## TOC <!-- omit in toc -->
 
 - [Usage](#usage)
   - [Install](#install)
+  - [CLI](#cli)
   - [API](#api)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
@@ -30,21 +31,35 @@ A simple library boilerplate.
 
 ```sh
 # pnpm
-pnpm add preversion
+pnpm add -D preversion
 
 # yarn
-yarn add preversion
+yarn add -D preversion
 
 # npm
-npm i preversion
+npm i -D preversion
+```
+
+### CLI
+
+```log
+Usage: preversion [options]
+
+A tiny cli helps you to publish alpha/beta versions to npm before releasing the final latest version
+
+Options:
+  -V, --version              output the version number
+  -b, --branch [string]      optional specified branch to be pushed after releasing successfully
+  -m, --message [string]     optional commit message when `branch` option enabled (default: "chore: release preversion v{{version}}")
+  -v, --preversion [string]  optional specified version to be released
+  -t, --tag [string]         optional specified npm tag to be released
+  -h, --help                 display help for command
 ```
 
 ### API
 
-```js
-import echo from 'preversion'
-
-echo()
+```ts
+import { getPreversionTag, getPreversion, preversion } from 'preversion'
 ```
 
 ## Sponsors
