@@ -1,0 +1,30 @@
+name: Release beta
+
+on:
+  pull_request:
+    branches: main
+
+jobs:
+  release_beta:
+    name: Release Beta
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Release beta
+        run: yarn release:beta
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,6 +1,7 @@
 {
   "version": 2,
   "alias": [
+    "prerelease.vercel.app",
     "preversion.vercel.app"
   ],
   "github": {

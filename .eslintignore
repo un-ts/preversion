@@ -3,6 +3,5 @@ dist
 lib
 CHANGELOG.md
 /auto-imports.d.ts
-/pnpm-lock.yaml
 !/.github
 !/.*.cjs

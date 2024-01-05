@@ -2,7 +2,7 @@
   "name": "preversion",
   "version": "0.1.0",
   "type": "module",
-  "description": "A simple library boilerplate.",
+  "description": "A tiny cli helps you to publish alpha/beta versions to npm before releasing the final latest version",
   "repository": "git+https://github.com/un-ts/preversion.git",
   "author": "JounQin (https://www.1stG.me) <admin@1stg.me>",
   "funding": "https://opencollective.com/unts",
@@ -11,7 +11,15 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "exports": "./src/index.ts",
+  "bin": "./lib/cli.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "exports": {
+    "types": "./lib/index.d.ts",
+    "import": "./lib/index.js",
+    "require": "./lib/index.cjs"
+  },
+  "types": "./lib/index.d.ts",
   "files": [
     "lib",
     "!**/*.tsbuildinfo"
@@ -22,78 +30,75 @@
     "release"
   ],
   "scripts": {
-    "build": "concurrently 'yarn:build:*'",
+    "build": "concurrently -r 'yarn:build:*'",
     "build:r": "r -f cjs",
     "build:tsc": "tsc -p src",
     "dev": "vitest",
     "docs:build": "vite build docs --emptyOutDir",
     "docs:dev": "vite docs",
-    "lint": "concurrently 'yarn:lint:*'",
+    "lint": "concurrently -r 'yarn:lint:*'",
     "lint:es": "eslint . --cache -f friendly --max-warnings 10",
     "lint:style": "stylelint . --cache",
     "lint:tsc": "tsc --noEmit",
     "prepare": "simple-git-hooks",
     "release": "yarn build && yarn changeset publish",
+    "release:beta": "yarn build && yarn preversion",
     "serve": "vite preview docs",
     "test": "vitest run --coverage",
     "typecov": "type-coverage",
-    "vercel-build": "yarn docs:build"
+    "vercel-build": "yarn docs:build",
+    "version": "changeset version && yarn --no-immutable"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "@pkgr/core": "^0.1.0",
+    "commander": "^11.1.0",
+    "semver": "^7.5.4"
   },
   "devDependencies": {
-    "@1stg/app-config": "^9.0.1",
-    "@1stg/lib-config": "^12.0.1",
+    "@1stg/app-config": "^10.0.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "@commitlint/cli": "^18.4.3",
+    "@commitlint/cli": "^18.4.4",
     "@mdx-js/rollup": "^3.0.0",
-    "@pkgr/rollup": "^4.1.3",
+    "@pkgr/rollup": "^5.0.0",
     "@size-limit/preset-small-lib": "^11.0.1",
     "@types/mdx": "^2.0.10",
-    "@types/node": "^20.10.4",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
-    "@types/web": "^0.0.125",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@types/semver": "^7.5.6",
+    "@types/web": "^0.0.134",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "@vitest/coverage-v8": "^1.0.2",
+    "@vitest/coverage-v8": "^1.1.3",
     "concurrently": "^8.2.2",
-    "eslint": "^8.55.0",
-    "github-markdown-css": "^5.4.0",
+    "eslint": "^8.56.0",
+    "github-markdown-css": "^5.5.0",
     "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
+    "react-router-dom": "^6.21.1",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "simple-git-hooks": "^2.9.0",
     "size-limit": "^11.0.1",
-    "stylelint": "^15.11.0",
-    "type-coverage": "^2.27.0",
+    "size-limit-preset-node-lib": "^0.3.0",
+    "stylelint": "^16.1.0",
+    "type-coverage": "^2.27.1",
     "typescript": "^5.3.3",
-    "unplugin-auto-import": "^0.17.2",
-    "vite": "^5.0.6",
-    "vitest": "^1.0.4"
+    "unplugin-auto-import": "^0.17.3",
+    "vite": "^5.0.11",
+    "vitest": "^1.1.3"
   },
   "resolutions": {
-    "@commitlint/cli": "^18.4.3",
-    "lint-staged": "^15.2.0",
-    "rollup": "^4.6.1"
-  },
-  "publishConfig": {
-    "main": "./lib/index.cjs",
-    "module": "./lib/index.js",
-    "exports": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./lib/index.cjs"
-    },
-    "types": "./lib/index.d.ts"
+    "prettier": "^3.1.1",
+    "size-limit-node-esbuild@npm:^0.3.0": "patch:size-limit-node-esbuild@npm%3A0.3.0#~/.yarn/patches/size-limit-node-esbuild-npm-0.3.0-6e195b31b7.patch"
   },
   "size-limit": [
     {
-      "path": "lib/index.js"
+      "config": "size-limit.esbuild.js",
+      "path": "lib/cli.js",
+      "limit": "22kB"
     }
   ],
   "typeCoverage": {

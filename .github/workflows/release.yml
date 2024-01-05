@@ -26,15 +26,15 @@ jobs:
           cache: yarn
 
       - name: Install Dependencies
-        run: yarn --no-immutable
+        run: yarn --immutable
 
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
         with:
-          publish: yarn release
-          version: yarn changeset version
           commit: 'chore: release preversion'
           title: 'chore: release preversion'
+          version: yarn run version
+          publish: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
