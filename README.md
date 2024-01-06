@@ -20,6 +20,8 @@
   - [Install](#install)
   - [CLI](#cli)
   - [API](#api)
+  - [CI](#ci)
+    - [GitHub Actions](#github-actions)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
 - [Changelog](#changelog)
@@ -61,6 +63,12 @@ Options:
 ```ts
 import { getPreversionTag, getPreversion, preversion } from 'preversion'
 ```
+
+### CI
+
+#### GitHub Actions
+
+[.github/workflows/release-beta.yml](https://github.com/un-ts/preversion/blob/main/.github/workflows/release-beta.yml)
 
 ## Sponsors
 

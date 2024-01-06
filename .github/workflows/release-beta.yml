@@ -2,7 +2,16 @@ name: Release beta
 
 on:
   pull_request:
-    branches: main
+    branches:
+      - main
+      - '!changeset-release/**'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: specified version to be released
+        required: true
+      tag:
+        description: optional specified npm tag to be released
 
 jobs:
   release_beta:
@@ -24,7 +33,15 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
+      - name: Set git info
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
       - name: Release beta
         run: yarn release:beta
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PREVERSION_VERSION: ${{ github.event.inputs.version }}
+          PREVERSION_TAG: ${{ github.event.inputs.tag }}
