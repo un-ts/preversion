@@ -2,8 +2,8 @@
 .type-coverage
 .vercel
 .yarn/*
-!.yarn/patches
 !.yarn/plugins
+!.yarn/releases
 coverage
 dist
 lib

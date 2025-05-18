@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/os-command */
+
 import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import { homedir } from 'node:os'
@@ -29,7 +31,7 @@ const pkgContent = fs.readFileSync(pkgPath, 'utf8')
 
 export const pkg = JSON.parse(pkgContent) as PackageJson
 
-// eslint-disable-next-line regexp/no-super-linear-backtracking
+// eslint-disable-next-line regexp/no-super-linear-backtracking, sonarjs/slow-regex
 const jsonRegex = /[[{](?:[\d\t\n\r +,.:[\]aeflnr-u{}-]|".*?")+[\]}]/gis
 
 const createStdioError = (error: StdioError) =>
@@ -39,7 +41,8 @@ const createStdioError = (error: StdioError) =>
   )
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
-export const getPreversion = (tag: string, version = tag) => {
+export const getPreversion = (tag: string, version?: string) => {
+  version ||= tag
   if (version.startsWith('v')) {
     version = version.slice(1)
   } else if (version === tag) {
@@ -94,7 +97,18 @@ export const preversion = ({
   preversion,
   tag,
 }: PreversionOptions) => {
-  tag ??= (preversion && getPreversionTag(preversion)) || PREVERSION_TAGS[1]
+  tag ||= (preversion && getPreversionTag(preversion)) || PREVERSION_TAGS[1]
+
+  console.debug(
+    '[preversion] branch:',
+    JSON.stringify(branch),
+    ', message:',
+    JSON.stringify(message),
+    ', preversion:',
+    JSON.stringify(preversion),
+    ', tag:',
+    JSON.stringify(tag),
+  )
 
   if (tag === 'latest') {
     console.error('Publish `latest` tag via this script is not permitted.')
@@ -124,11 +138,15 @@ export const preversion = ({
   fs.writeFileSync(pkgPath, JSON.stringify(newPkg, null, 2))
 
   try {
+    // eslint-disable-next-line sonarjs/no-os-command-from-path
     execSync('npx clean-pkg-json')
     execSync(
-      `npm publish ${
-        pkg.publishConfig?.directory ? `./${pkg.publishConfig.directory}` : ''
-      } --tag ${tag}`,
+      `npm publish${
+        pkg.publishConfig?.directory
+          ? ` ./${pkg.publishConfig.directory} `
+          : ' '
+      }--tag ${tag}`,
+      { encoding: 'utf8', stdio: 'inherit' },
     )
   } catch (err) {
     const error = err as StdioError

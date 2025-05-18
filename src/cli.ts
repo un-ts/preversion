@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { fileURLToPath } from 'node:url'
 
 import { cjsRequire } from '@pkgr/core'
@@ -14,9 +16,9 @@ const {
   PREVERSION_TAG,
 } = process.env
 
-const { name, description, version } = cjsRequire(
+const { name, description, version } = cjsRequire<PackageJson>(
   fileURLToPath(new URL('../package.json', import.meta.url)),
-) as PackageJson
+)
 
 program
   .name(name)
