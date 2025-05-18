@@ -1,6 +1,6 @@
 {
   "name": "preversion",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
   "description": "A tiny cli helps you to publish alpha/beta versions to npm before releasing the final latest version",
   "repository": "git+https://github.com/un-ts/preversion.git",
