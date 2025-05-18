@@ -4,6 +4,10 @@ on:
   - push
   - pull_request
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ci:
     name: Lint and Test with Node.js ${{ matrix.node }} on ${{ matrix.os }}
@@ -12,6 +16,7 @@ jobs:
         node:
           - 18
           - 20
+          - 24
         os:
           - macos-latest
           - windows-latest
@@ -20,9 +25,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4

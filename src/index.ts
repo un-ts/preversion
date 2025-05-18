@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/os-command */
+
 import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import { homedir } from 'node:os'
@@ -29,7 +31,7 @@ const pkgContent = fs.readFileSync(pkgPath, 'utf8')
 
 export const pkg = JSON.parse(pkgContent) as PackageJson
 
-// eslint-disable-next-line regexp/no-super-linear-backtracking
+// eslint-disable-next-line regexp/no-super-linear-backtracking, sonarjs/slow-regex
 const jsonRegex = /[[{](?:[\d\t\n\r +,.:[\]aeflnr-u{}-]|".*?")+[\]}]/gis
 
 const createStdioError = (error: StdioError) =>
@@ -124,6 +126,7 @@ export const preversion = ({
   fs.writeFileSync(pkgPath, JSON.stringify(newPkg, null, 2))
 
   try {
+    // eslint-disable-next-line sonarjs/no-os-command-from-path
     execSync('npx clean-pkg-json')
     execSync(
       `npm publish ${
