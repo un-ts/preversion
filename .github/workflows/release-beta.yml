@@ -36,9 +36,6 @@ jobs:
           node-version: lts/*
           cache: yarn
 
-      - name: Upgrade npm
-        run: npm install -g npm@latest
-
       - name: Install dependencies
         run: yarn --immutable
 
@@ -51,6 +48,7 @@ jobs:
         run: yarn release:beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ''
+          NPM_CONFIG_PROVENANCE: true
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREVERSION_VERSION: ${{ github.event.inputs.version }}
           PREVERSION_TAG: ${{ github.event.inputs.tag }}
