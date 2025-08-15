@@ -122,15 +122,9 @@ export const preversion = ({
 
   if (fs.existsSync(npmrcPath)) {
     console.log('Found existing `.npmrc` file')
-  } else if (NPM_TOKEN) {
+  } else if (NPM_TOKEN != null) {
     console.log('No `.npmrc` file found, creating one')
     fs.writeFileSync(npmrcPath, `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`)
-  } else {
-    console.error(
-      'No `.npmrc` found nor `NPM_TOKEN` provided, unable to publish packages',
-    )
-    process.exitCode = 1
-    return
   }
 
   const newPkg = { ...pkg }
