@@ -50,7 +50,7 @@
     "lint:style": "stylelint . --cache",
     "lint:tsc": "tsc --noEmit",
     "prepare": "patch-package && simple-git-hooks && yarn-berry-deduplicate || exit 0",
-    "release": "yarn build && yarn changeset publish",
+    "release": "yarn build && changeset publish",
     "release:beta": "yarn build && yarn preversion",
     "serve": "vite preview docs",
     "test": "vitest run --coverage",
