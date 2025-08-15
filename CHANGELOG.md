@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.1
+
+### Patch Changes
+
+- [#15](https://github.com/un-ts/preversion/pull/15) [`da1b1df`](https://github.com/un-ts/preversion/commit/da1b1df09e55ca62d48bcc8f58a9f466f8a985ae) Thanks [@JounQin](https://github.com/JounQin)! - fix: add support for empty NPM_TOKEN for trusted publisher
+
 ## 0.2.0
 
 ### Minor Changes
